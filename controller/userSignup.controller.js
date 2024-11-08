@@ -1,7 +1,16 @@
 import userModel from "../model/usreSignup.model.js";
 
-export const getsignup = (req, res) => {
-    res.send({ message: "This is read..!" });
+export const getsignup = async (req, res) => {
+    try {
+        const getuserDetails = await userModel.find();
+        res.json(getuserDetails);
+
+    } catch (error) {
+        res.status(400).json({
+            message: "Some think went wrong..!",
+            error: error.message
+        });
+    }
 };
 
 export const postsignup = async (req, res) => {

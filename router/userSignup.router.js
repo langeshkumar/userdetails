@@ -1,14 +1,14 @@
 import express from "express"
 import { deletesignup, editsignup, getsignup, postsignup } from "../controller/userSignup.controller.js";
 
-const Router = express.Router();
+const Routersignup = express.Router();
 
-Router.get('/', getsignup);
+Routersignup.get('/', getsignup);
 
-Router.post('/', postsignup);
+Routersignup.post('/', postsignup);
 
-Router.put('/:id', editsignup);
+Routersignup.put('/:id', editsignup);
 
-Router.delete('/:id', deletesignup);
+Routersignup.delete('/:id', deletesignup);
 
-export default Router
+export default Routersignup
