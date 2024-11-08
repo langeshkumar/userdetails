@@ -24,14 +24,21 @@ const userSignupSchema = new mongoose.Schema({
         type: String,
         required: [true, "Password is required..!"],
         unique: true,
-        minlength: [8, "Password must be at least 8 characters long"],
-        validate: {
-            validator: function (userpassword) {
-                const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-                return passwordRegex.test(userpassword);
+        validate: [
+            {
+                validator: function (userpassword) {
+                    return userpassword.length > 8;
+                },
+                message: props => `( ${props.value} ) Password must be at least 8 characters long`
             },
-            message: props => `${props.value} this password is invalid`
-        }
+            {
+                validator: function (userpassword) {
+                    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+                    return passwordRegex.test(userpassword);
+                },
+                message: props => `( ${props.value} ) this password is invalid`
+            }
+        ]
     }
 });
 
